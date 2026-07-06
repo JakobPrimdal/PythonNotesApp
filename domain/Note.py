@@ -15,10 +15,12 @@ class Note:
     _is_favorite: bool = False
     _is_archived: bool = field(default=False, repr=False)
 
+    def __post_init__(self) -> None:
+        if self._title.strip() == "" and self._content.strip() == "":
+            raise ValueError("Empty title and empty content is not allowed for any note")
+
     @classmethod
     def create(cls, title: str, content: str) -> "Note":
-        if title.strip() == "" and content.strip() == "":
-            raise ValueError("Empty title and empty content is not allowed")
         return cls(
             _id=uuid4(),
             _title=title,
@@ -49,7 +51,7 @@ class Note:
         if self._is_archived:
             raise ValueError("Cannot change content of an archived note")
         if new_content.strip() == "" and self._title.strip() == "":
-            raise ValueError("Empty content and empty title is not allowed")
+            raise ValueError("Empty content and empty title is not allowed of an archived note")
         self._content = new_content
 
     @property
