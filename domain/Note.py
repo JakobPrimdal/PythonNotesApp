@@ -81,7 +81,9 @@ class Note:
     def remove_tag(self, tag: str) -> None:
         if self._is_archived:
             raise ValueError("Cannot remove tag from an archived note")
-        if tag in self._tags:
+        if tag not in self._tags:
+            raise ValueError("Tag not found")
+        else:
             self._tags.remove(tag)
 
     @property
