@@ -146,6 +146,14 @@ def test_add_duplicate_tag_raises_error():
     with pytest.raises(ValueError):
         note.add_tag("tag")
 
+def test_add_empty_tag_raises_error():
+    # Arrange
+    note = Note.create(title="title", content="content")
+
+    # Act & Assert
+    with pytest.raises(ValueError):
+        note.add_tag("")
+
 def test_remove_tag_succeeds():
     # Arrange
     note = Note.create(title="title", content="content")
@@ -212,6 +220,23 @@ def test_cannot_unmark_archived_note_as_favorite():
     note.archive()
 
     # Act & Assert
+    with pytest.raises(ValueError):
+        note.unmark_as_favorite()
+
+def test_mark_already_favorite_marked_note_raises_error():
+    # Arrange
+    note = Note.create(title="title", content="content")
+    note.mark_as_favorite()
+
+    # Act & Assert
+    with pytest.raises(ValueError):
+        note.mark_as_favorite()
+
+def test_unmark_already_favorite_unmarked_note_raises_error():
+    # Arrange
+    note = Note.create(title="title", content="content")
+
+    # Act and Assert
     with pytest.raises(ValueError):
         note.unmark_as_favorite()
 

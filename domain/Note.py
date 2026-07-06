@@ -75,9 +75,11 @@ class Note:
         if self._is_archived:
             raise ValueError("Cannot add tag to an archived note")
         cleaned = tag.strip()
+        if cleaned == "" :
+            raise ValueError("Tag cannot be empty")
         if cleaned in self._tags:
             raise ValueError("Tag already exists")
-        if cleaned != "" and cleaned not in self._tags:
+        else:
             self._tags.append(cleaned)
 
     def remove_tag(self, tag: str) -> None:
@@ -95,11 +97,15 @@ class Note:
     def mark_as_favorite(self) -> None:
         if self._is_archived:
             raise ValueError("Cannot mark an archived note as favorite")
+        if self._is_favorite:
+            raise ValueError("Note already marked as favorite")
         self._is_favorite = True
 
     def unmark_as_favorite(self) -> None:
         if self._is_archived:
             raise ValueError("Cannot unmark an archived note as favorite")
+        if not self._is_favorite:
+            raise ValueError("Note already unmarked as favorite")
         self._is_favorite = False
 
     @property
