@@ -75,6 +75,8 @@ class Note:
         if self._is_archived:
             raise ValueError("Cannot add tag to an archived note")
         cleaned = tag.strip()
+        if cleaned in self._tags:
+            raise ValueError("Tag already exists")
         if cleaned != "" and cleaned not in self._tags:
             self._tags.append(cleaned)
 

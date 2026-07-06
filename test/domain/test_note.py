@@ -137,16 +137,14 @@ def test_add_tag_adds_cleaned_tag():
     # Assert
     assert note.tags == ["new_tag"]
 
-def test_add_duplicate_tag_does_not_add_twice():
+def test_add_duplicate_tag_raises_error():
     # Arrange
     note = Note.create(title="title", content="content")
     note.add_tag("tag")
 
-    # Act
-    note.add_tag("tag")
-
-    # Assert
-    assert note.tags == ["tag"]
+    # Act & Assert
+    with pytest.raises(ValueError):
+        note.add_tag("tag")
 
 def test_remove_tag_succeeds():
     # Arrange
