@@ -3,6 +3,8 @@ from datetime import datetime
 from typing import Optional
 from uuid import UUID, uuid4
 
+from domain.Tag import Tag
+
 
 @dataclass
 class Note:
@@ -11,7 +13,7 @@ class Note:
     _content: str
     _created_at: datetime
     _folder_id: Optional[UUID] = None
-    _tags: list[str] = field(default_factory=list)
+    _tags: list[Tag] = field(default_factory=list)
     _is_favorite: bool = False
     _is_archived: bool = field(default=False, repr=False)
 
@@ -69,26 +71,25 @@ class Note:
 
     @property
     def tags(self) -> list[str]:
-        return self._tags
+        return [tag.name for tag in self._tags]
 
     def add_tag(self, tag: str) -> None:
         if self._is_archived:
             raise ValueError("Cannot add tag to an archived note")
-        cleaned = tag.strip()
-        if cleaned == "" :
-            raise ValueError("Tag cannot be empty")
-        if cleaned in self._tags:
+        new_tag = Tag(tag)
+        if new_tag in self._tags:
             raise ValueError("Tag already exists")
         else:
-            self._tags.append(cleaned)
+            self._tags.append(new_tag)
 
     def remove_tag(self, tag: str) -> None:
         if self._is_archived:
             raise ValueError("Cannot remove tag from an archived note")
-        if tag not in self._tags:
+        tag_to_remove = Tag(tag)
+        if tag_to_remove not in self._tags:
             raise ValueError("Tag not found")
         else:
-            self._tags.remove(tag)
+            self._tags.remove(tag_to_remove)
 
     @property
     def is_favorite(self) -> bool:
