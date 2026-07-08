@@ -1,7 +1,7 @@
 from uuid import uuid4
 
 from domain.Folder import Folder
-from fakes.in_memory_folder_repository import InMemoryFolderRepository
+from test.fakes.in_memory_folder_repository import InMemoryFolderRepository
 
 
 def test_save_and_get_by_id_returns_saved_folder():

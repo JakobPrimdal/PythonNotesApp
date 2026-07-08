@@ -1,7 +1,7 @@
 from uuid import uuid4
 
 from domain.Note import Note
-from fakes.in_memory_note_repository import InMemoryNoteRepository
+from test.fakes.in_memory_note_repository import InMemoryNoteRepository
 
 
 def test_save_and_get_by_id_returns_saved_note():
