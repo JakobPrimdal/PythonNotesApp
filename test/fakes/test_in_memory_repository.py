@@ -7,7 +7,7 @@ from fakes.in_memory_note_repository import InMemoryNoteRepository
 def test_save_and_get_by_id_returns_saved_note():
     # Arrange
     repository = InMemoryNoteRepository()
-    note = Note.create(title="Indkøb", content="Mælk")
+    note = Note.create(title="title", content="content")
 
     # Act
     repository.save(note)

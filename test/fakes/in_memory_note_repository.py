@@ -6,9 +6,9 @@ from domain.Note import Note
 
 class InMemoryNoteRepository:
     """
-    InMemoryNoteRepository is a simple implementation of NoteRepository.
+    InMemoryNoteRepository is a simple implementation of INoteRepository.
 
-    Used only in tests, to test the application-layer's use cases with a real DB.
+    Used only in tests, to test the application-layer's use cases without a real DB.
     Acts as a real repository (data is there, and query works - however, only in memory)
     """
 

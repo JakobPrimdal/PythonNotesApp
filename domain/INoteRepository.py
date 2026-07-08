@@ -5,7 +5,7 @@ from domain.Note import Note
 
 
 @runtime_checkable
-class NoteRepository(Protocol):
+class INoteRepository(Protocol):
     def get_by_uuid(self, note_uuid: UUID) -> Optional[Note]:
         ...
 
