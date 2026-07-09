@@ -2,7 +2,7 @@ from uuid import UUID
 
 from domain.INoteRepository import INoteRepository
 from domain.Note import Note
-from domain.NoteNotFoundError import NoteNotFoundError
+from domain.Errors.NoteNotFoundError import NoteNotFoundError
 
 
 class UpdateNoteTitle:
