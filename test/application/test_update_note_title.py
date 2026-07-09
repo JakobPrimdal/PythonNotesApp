@@ -4,7 +4,7 @@ import pytest
 
 from application.UpdateNoteTitle import UpdateNoteTitle
 from domain.Note import Note
-from domain.Errors.NoteNotFoundError import NoteNotFoundError
+from domain.errors.NoteNotFoundError import NoteNotFoundError
 from test.fakes.in_memory_note_repository import InMemoryNoteRepository
 
 
