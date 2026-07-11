@@ -1,7 +1,7 @@
 # test/application/test_create_folder.py
 import pytest
 
-from application.CreateFolder import CreateFolder
+from application.use_cases.folder.CreateFolder import CreateFolder
 from domain.errors.DuplicateFolderNameError import DuplicateFolderNameError
 from test.fakes.in_memory_folder_repository import InMemoryFolderRepository
 

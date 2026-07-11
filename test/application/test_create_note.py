@@ -1,6 +1,6 @@
 import pytest
 
-from application.CreateNote import CreateNote
+from application.use_cases.note.CreateNote import CreateNote
 from domain.Note import Note
 from test.fakes.in_memory_note_repository import InMemoryNoteRepository
 

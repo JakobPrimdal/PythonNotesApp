@@ -1,5 +1,5 @@
-from application.CreateNote import CreateNote
-from application.DeleteNote import DeleteNote
+from application.use_cases.note.CreateNote import CreateNote
+from application.use_cases.note.DeleteNote import DeleteNote
 from domain.INoteRepository import INoteRepository
 from test.fakes.in_memory_note_repository import InMemoryNoteRepository
 
