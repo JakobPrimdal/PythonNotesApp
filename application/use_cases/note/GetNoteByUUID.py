@@ -1,7 +1,7 @@
 from typing import Optional
 from uuid import UUID
 
-from domain.INoteRepository import INoteRepository
+from domain.interfaces.INoteRepository import INoteRepository
 from domain.Note import Note
 
 

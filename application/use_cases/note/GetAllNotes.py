@@ -1,4 +1,4 @@
-from domain.INoteRepository import INoteRepository
+from domain.interfaces.INoteRepository import INoteRepository
 from domain.Note import Note
 
 

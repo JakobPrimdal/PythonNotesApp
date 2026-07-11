@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from domain.INoteRepository import INoteRepository
+from domain.interfaces.INoteRepository import INoteRepository
 from domain.Note import Note
 from domain.errors.NoteNotFoundError import NoteNotFoundError
 

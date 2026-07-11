@@ -1,6 +1,6 @@
 from domain.errors.DuplicateFolderNameError import DuplicateFolderNameError
 from domain.Folder import Folder
-from domain.IFolderRepository import IFolderRepository
+from domain.interfaces.IFolderRepository import IFolderRepository
 
 
 class CreateFolder:
