@@ -15,7 +15,7 @@ def test_get_note_by_uuid_succeeds():
     # Act & Assert
     assert note == use_case.execute(note.id)
 
-def test_get_note_by_uuid_unknown_uuid():
+def test_get_note_by_unknown_uuid():
     # Arrange
     repository = InMemoryNoteRepository()
     note = Note.create(title="title", content="content")
