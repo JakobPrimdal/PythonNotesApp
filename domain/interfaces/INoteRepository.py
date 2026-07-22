@@ -12,6 +12,9 @@ class INoteRepository(Protocol):
     def get_all(self) -> list[Note]:
         ...
 
+    def get_by_folder_id(self, folder_uuid: UUID) -> list[Note]:
+        ...
+
     def save(self, note: Note) -> None:
         ...
 

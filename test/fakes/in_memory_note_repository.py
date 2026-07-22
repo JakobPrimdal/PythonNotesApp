@@ -21,6 +21,12 @@ class InMemoryNoteRepository:
     def get_all(self) -> list[Note]:
         return list(self._notes.values())
 
+    def get_by_folder_id(self, folder_uuid: UUID) -> list[Note]:
+        notes = [
+            note for note in self._notes.values() if note.folder_id == folder_uuid
+        ]
+        return notes
+
     def save(self, note: Note) -> None:
         self._notes[note.id] = note
 
