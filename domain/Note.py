@@ -3,8 +3,6 @@ from datetime import datetime
 from typing import Optional
 from uuid import UUID, uuid4
 
-from domain.Tag import Tag
-
 
 @dataclass
 class Note:
@@ -13,7 +11,7 @@ class Note:
     _content: str
     _created_at: datetime
     _folder_id: Optional[UUID] = None
-    _tags: list[Tag] = field(default_factory=list)
+    _tag_ids: list[UUID] = field(default_factory=list)
     _is_favorite: bool = False
     _is_archived: bool = field(default=False, repr=False)
 
@@ -70,26 +68,22 @@ class Note:
         self._folder_id = folder_id
 
     @property
-    def tags(self) -> list[str]:
-        return [tag.name for tag in self._tags]
+    def tag_ids(self) -> list[UUID]:
+        return list(self._tag_ids)
 
-    def add_tag(self, tag: str) -> None:
+    def add_tag(self, tag_id: UUID) -> None:
         if self._is_archived:
             raise ValueError("Cannot add tag to an archived note")
-        new_tag = Tag(tag)
-        if new_tag in self._tags:
+        if tag_id in self._tag_ids:
             raise ValueError("Tag already exists")
-        else:
-            self._tags.append(new_tag)
+        self._tag_ids.append(tag_id)
 
-    def remove_tag(self, tag: str) -> None:
+    def remove_tag(self, tag_id: UUID) -> None:
         if self._is_archived:
             raise ValueError("Cannot remove tag from an archived note")
-        tag_to_remove = Tag(tag)
-        if tag_to_remove not in self._tags:
+        if tag_id not in self._tag_ids:
             raise ValueError("Tag not found")
-        else:
-            self._tags.remove(tag_to_remove)
+        self._tag_ids.remove(tag_id)
 
     @property
     def is_favorite(self) -> bool:

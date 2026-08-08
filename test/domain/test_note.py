@@ -16,7 +16,7 @@ def test_create_note_with_title_and_content_succeeds():
     assert note.is_archived == False
     assert note.is_favorite == False
     assert note.folder_id is None
-    assert note.tags == []
+    assert note.tag_ids == []
 
 def test_create_create_note_with_only_title_sucseeds():
     # Arrange & Act
@@ -127,43 +127,47 @@ def test_cannot_update_title_on_archived_note():
     with pytest.raises(ValueError):
         note.update_title("new_title")
 
-def test_add_tag_adds_cleaned_tag():
+def test_add_tag_adds_tag_id():
     # Arrange
     note = Note.create(title="title", content="content")
+    tag_id = uuid.uuid4()
 
     # Act
-    note.add_tag("   new_tag   ")
+    note.add_tag(tag_id)
 
     # Assert
-    assert note.tags == ["new_tag"]
+    assert note.tag_ids == [tag_id]
 
-def test_add_duplicate_tag_raises_error():
+def test_add_duplicate_tag_id_raises_error():
     # Arrange
     note = Note.create(title="title", content="content")
-    note.add_tag("tag")
+    tag_id = uuid.uuid4()
+    note.add_tag(tag_id)
 
     # Act & Assert
     with pytest.raises(ValueError):
-        note.add_tag("tag")
+        note.add_tag(tag_id)
 
-def test_add_empty_tag_raises_error():
+def test_add_tag_on_archived_note_raises_error():
     # Arrange
     note = Note.create(title="title", content="content")
+    note.archive()
 
     # Act & Assert
     with pytest.raises(ValueError):
-        note.add_tag("")
+        note.add_tag(uuid.uuid4())
 
 def test_remove_tag_succeeds():
     # Arrange
     note = Note.create(title="title", content="content")
-    note.add_tag("tag")
+    tag_id = uuid.uuid4()
+    note.add_tag(tag_id)
 
     # Act
-    note.remove_tag("tag")
+    note.remove_tag(tag_id)
 
     # Assert
-    assert note.tags == []
+    assert note.tag_ids == []
 
 def test_remove_not_found_tag_raises_error():
     # Arrange
@@ -171,17 +175,18 @@ def test_remove_not_found_tag_raises_error():
 
     # Act & Assert
     with pytest.raises(ValueError):
-        note.remove_tag("tag")
+        note.remove_tag(uuid.uuid4())
 
 def test_remove_tag_on_archived_note_raises_error():
     # Arrange
     note = Note.create(title="title", content="content")
-    note.add_tag("tag")
+    tag_id = uuid.uuid4()
+    note.add_tag(tag_id)
     note.archive()
 
     # Act & Assert
     with pytest.raises(ValueError):
-        note.remove_tag("tag")
+        note.remove_tag(tag_id)
 
 def test_mark_as_favorite_succeeds():
     # Arrange
