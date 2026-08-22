@@ -11,7 +11,7 @@ from test.fakes.in_memory_tag_repository import InMemoryTagRepository
 import pytest
 
 
-def test_discard_tag_removes_from_notes_including_archived_ones():
+def test_delete_tag_removes_from_notes_including_archived_ones():
     # Arrange
     note_repository: INoteRepository = InMemoryNoteRepository()
     tag_repository: ITagRepository = InMemoryTagRepository()
@@ -36,11 +36,3 @@ def test_discard_tag_removes_from_notes_including_archived_ones():
 
     # Assert
     assert note.tag_ids == [] and note2.tag_ids == []
-
-def test_discard_tag_reference_raises_when_tag_not_present():
-    # Arrange
-    note = Note.create(title="title", content="content")
-
-    # Act & Arrange
-    with pytest.raises(ValueError):
-        note.discard_tag_reference(uuid4())

@@ -278,3 +278,12 @@ def test_set_folder_id_on_archived_note_raises_error():
     # Act & Assert
     with pytest.raises(ValueError):
         note.set_folder_id(folder_id=uuid.uuid4())
+
+
+def test_discard_tag_reference_raises_when_tag_not_present():
+    # Arrange
+    note = Note.create(title="title", content="content")
+
+    # Act & Arrange
+    with pytest.raises(ValueError):
+        note.discard_tag_reference(uuid.uuid4())
