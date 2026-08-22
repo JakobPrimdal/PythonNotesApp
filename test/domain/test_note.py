@@ -3,6 +3,7 @@ import uuid
 import pytest
 
 from domain.Note import Note
+from domain.Tag import Tag
 
 
 def test_create_note_with_title_and_content_succeeds():
@@ -227,6 +228,19 @@ def test_cannot_unmark_archived_note_as_favorite():
     # Act & Assert
     with pytest.raises(ValueError):
         note.unmark_as_favorite()
+
+def test_discard_tag_reference_removes_tag_even_when_archived():
+    # Arrange
+    note = Note.create(title="title", content="content")
+    tag = Tag.create(name="tag")
+    note.add_tag(tag.id)
+    note.archive()
+
+    # Act
+    note.discard_tag_reference(tag.id)
+
+    # Assert
+    assert note.tag_ids == []
 
 def test_mark_already_favorite_marked_note_raises_error():
     # Arrange

@@ -116,3 +116,16 @@ class Note:
         if not self._is_archived:
             raise ValueError("Note not archived")
         self._is_archived = False
+
+    def discard_tag_reference(self, tag_id: UUID) -> None:
+        """
+        Removes a tag reference from this note, ignoring the archived-note state.
+
+        This exists specifically for cascade cleanup when a Tag is deleted
+        elsewhere in the system (see the DeleteTag use case). It is not a
+        general-purpose edit method and should not be used as a way to modify a
+        single archived note.
+        """
+        if tag_id not in self._tag_ids:
+            raise ValueError("Tag not found")
+        self._tag_ids.remove(tag_id)
