@@ -1,4 +1,3 @@
-import uuid
 from uuid import uuid4
 
 import pytest

@@ -1,5 +1,3 @@
-from uuid import uuid4
-
 from application.use_cases.tag.DeleteTag import DeleteTag
 from domain.Note import Note
 from domain.Tag import Tag
@@ -7,8 +5,6 @@ from domain.interfaces.INoteRepository import INoteRepository
 from domain.interfaces.ITagRepository import ITagRepository
 from test.fakes.in_memory_note_repository import InMemoryNoteRepository
 from test.fakes.in_memory_tag_repository import InMemoryTagRepository
-
-import pytest
 
 
 def test_delete_tag_removes_from_notes_including_archived_ones():
