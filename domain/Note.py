@@ -62,7 +62,7 @@ class Note:
     def folder_id(self) -> Optional[UUID]:
         return self._folder_id
 
-    def set_folder_id(self, folder_id: UUID) -> None:
+    def set_folder_id(self, folder_id: Optional[UUID]) -> None:
         if self._is_archived:
             raise ValueError("Cannot change folder of an archived note")
         self._folder_id = folder_id

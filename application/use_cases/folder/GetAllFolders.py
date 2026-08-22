@@ -1,4 +1,4 @@
-from domain.Note import Note
+from domain.Folder import Folder
 from domain.interfaces.IFolderRepository import IFolderRepository
 
 
@@ -9,6 +9,6 @@ class GetAllFolders:
     def __init__(self, folder_repository: IFolderRepository) -> None:
         self._folder_repository = folder_repository
 
-    def execute(self) -> list[Note]:
-        notes = self._folder_repository.get_all()
-        return notes
+    def execute(self) -> list[Folder]:
+        folders = self._folder_repository.get_all()
+        return folders
