@@ -2,6 +2,7 @@ from typing import Optional
 from uuid import UUID
 
 from domain.Folder import Folder
+from domain.errors.FolderNotFoundError import FolderNotFoundError
 from domain.interfaces.IFolderRepository import IFolderRepository
 
 
@@ -15,4 +16,6 @@ class GetFolderByUUID:
 
     def execute(self, folder_uuid: UUID) -> Optional[Folder]:
         folder = self._folder_repository.get_by_uuid(folder_uuid)
+        if folder is None:
+            raise FolderNotFoundError(f"Folder with uuid {folder_uuid} not found")
         return folder
