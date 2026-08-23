@@ -5,7 +5,7 @@ from domain.Note import Note
 from domain.errors.NoteNotFoundError import NoteNotFoundError
 
 
-class UpdateNoteTitle:
+class RenameNoteTitle:
     def __init__(self, note_repository: INoteRepository) -> None:
         self._note_repository = note_repository
 

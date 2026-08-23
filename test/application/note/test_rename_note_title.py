@@ -2,18 +2,18 @@ from uuid import uuid4
 
 import pytest
 
-from application.use_cases.note.UpdateNoteTitle import UpdateNoteTitle
+from application.use_cases.note.RenameNoteTitle import RenameNoteTitle
 from domain.Note import Note
 from domain.errors.NoteNotFoundError import NoteNotFoundError
 from test.fakes.in_memory_note_repository import InMemoryNoteRepository
 
 
-def test_update_note_title_persists():
+def test_rename_note_title_persists():
     # Arrange
     repository = InMemoryNoteRepository()
     note = Note.create(title="title", content="content")
     repository.save(note)
-    use_case = UpdateNoteTitle(note_repository=repository)
+    use_case = RenameNoteTitle(note_repository=repository)
 
     # Act
     result = use_case.execute(note.id, "new_title")
@@ -24,7 +24,7 @@ def test_update_note_title_persists():
 def test_raises_when_note_does_not_exist():
     # Arrange
     repository = InMemoryNoteRepository()
-    use_case = UpdateNoteTitle(repository)
+    use_case = RenameNoteTitle(repository)
 
     # Act & Assert
     with pytest.raises(NoteNotFoundError):
@@ -38,7 +38,7 @@ def test_raises_when_note_is_archived():
     note.archive()
     repository.save(note)
 
-    use_case = UpdateNoteTitle(repository)
+    use_case = RenameNoteTitle(repository)
 
     # Act & Assert
     with pytest.raises(ValueError):
