@@ -6,7 +6,7 @@ from domain.errors.FolderNotFoundError import FolderNotFoundError
 from domain.interfaces.IFolderRepository import IFolderRepository
 
 
-class UpdateFolder:
+class RenameFolder:
     def __init__(self, folder_repository: IFolderRepository):
         self._folder_repository = folder_repository
 
